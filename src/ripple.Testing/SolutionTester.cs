@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using FubuCore;
 using FubuTestingSupport;
-using ripple.Local;
 using ripple.Model;
 using ripple.Nuget;
 using ripple.Runners;
@@ -19,7 +18,7 @@ namespace ripple.Testing
                 SourceFolder = "src",
                 BuildCommand = "rake",
                 FastBuildCommand = "rake compile",
-				Directory = "directory1".ToFullPath()
+                Directory = "directory1".ToFullPath()
             };
 
             var processInfo = solution.CreateBuildProcess(false);
@@ -32,13 +31,13 @@ namespace ripple.Testing
         [Test]
         public void create_process_for_fast_build()
         {
-			var solution = new Solution
-			{
-				SourceFolder = "src",
+            var solution = new Solution
+            {
+                SourceFolder = "src",
                 BuildCommand = "rake",
-				FastBuildCommand = "rake compile",
-				Directory = "directory1".ToFullPath()
-			};
+                FastBuildCommand = "rake compile",
+                Directory = "directory1".ToFullPath()
+            };
 
             var processInfo = solution.CreateBuildProcess(true);
 
@@ -53,12 +52,12 @@ namespace ripple.Testing
             var solution = new Solution
             {
                 SourceFolder = "source",
-				Directory = ".".ToFullPath()
+                Directory = ".".ToFullPath()
             };
 
-	        var storage = new StubNugetStorage();
-	        storage.Add("FubuCore", "0.9.1.37");
-			solution.UseStorage(storage);
+            var storage = new StubNugetStorage();
+            storage.Add("FubuCore", "0.9.1.37");
+            solution.UseStorage(storage);
 
             var project = new Project("something.csproj");
             var dependency = new Dependency("FubuCore", "0.9.1.37");
@@ -69,7 +68,7 @@ namespace ripple.Testing
 
             solution.NugetFolderFor(spec)
                 .ShouldEqual(".".ToFullPath().AppendPath(solution.PackagesDirectory(), "FubuCore"));
-        
+
         }
 
         [Test]
@@ -107,7 +106,7 @@ namespace ripple.Testing
         [Test]
         public void uses_explicit_dependency_constraint()
         {
-            var explicitDep = new Dependency("FubuCore") { Constraint = "Current,NextMinor"};
+            var explicitDep = new Dependency("FubuCore") { Constraint = "Current,NextMinor" };
 
 
             var solution = new Solution();

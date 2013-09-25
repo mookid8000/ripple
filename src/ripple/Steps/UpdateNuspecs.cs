@@ -2,8 +2,8 @@
 using System.Linq;
 using NuGet;
 using ripple.Commands;
-using ripple.Local;
-using ripple.Model;
+using ripple.Nuget;
+using ripple.Packaging;
 
 namespace ripple.Steps
 {
@@ -53,8 +53,8 @@ namespace ripple.Steps
 
           
             group
-               .Projects
-               .SelectMany(project => project.References)
+                .Projects
+                .SelectMany(project => project.References)
                 .Each(projectRef =>
                 {
                     var target = groups.FirstOrDefault(x => x.Projects.Contains(projectRef));
@@ -77,7 +77,7 @@ namespace ripple.Steps
              .SelectMany(project => project.CsProj.ProjectReferences)
                 .Each(csProjectRef=>
                 {
-                
+
                   var target = groups.Where(g=>g!=group)
                         .FirstOrDefault(x => x.Projects.Any(p => p.Name == csProjectRef.Split(' ').First()));
 
