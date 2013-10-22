@@ -11,42 +11,6 @@ namespace ripple.Testing
     public class SolutionTester
     {
         [Test]
-        public void create_process_info_for_full_build()
-        {
-            var solution = new Solution
-            {
-                SourceFolder = "src",
-                BuildCommand = "rake",
-                FastBuildCommand = "rake compile",
-                Directory = "directory1".ToFullPath()
-            };
-
-            var processInfo = solution.CreateBuildProcess(false);
-
-            processInfo.WorkingDirectory.ShouldEqual("directory1".ToFullPath());
-            processInfo.FileName.ShouldEqual(Runner.Rake.Path);
-            processInfo.Arguments.ShouldBeEmpty();
-        }
-
-        [Test]
-        public void create_process_for_fast_build()
-        {
-            var solution = new Solution
-            {
-                SourceFolder = "src",
-                BuildCommand = "rake",
-                FastBuildCommand = "rake compile",
-                Directory = "directory1".ToFullPath()
-            };
-
-            var processInfo = solution.CreateBuildProcess(true);
-
-            processInfo.WorkingDirectory.ShouldEqual("directory1".ToFullPath());
-            processInfo.FileName.ShouldEqual(Runner.Rake.Path);
-            processInfo.Arguments.ShouldEqual("compile");
-        }
-
-        [Test]
         public void get_nuget_directory()
         {
             var solution = new Solution
